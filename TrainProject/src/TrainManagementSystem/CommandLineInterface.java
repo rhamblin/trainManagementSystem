@@ -20,6 +20,7 @@ public class CommandLineInterface {
     private TrainManagementSystem tms;
 
     public CommandLineInterface() {
+        /*yyyyyyyy*/
         currentUser = null;
         tms = new TrainManagementSystem();
     }
