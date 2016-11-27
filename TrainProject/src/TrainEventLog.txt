@@ -1,9 +1,3 @@
 0 null 0 0 null null AtPickUpLocation AtPickUpLocation
-0 null 0 0 null null AtPickUpLocation AtPickUpLocation
-0 null 0 0 null null AtPickUpLocation AtPickUpLocation
-0 null 0 0 null null AtPickUpLocation AtPickUpLocation
-0 null 0 0 null null AtPickUpLocation AtPickUpLocation
-0 null 0 0 null null AtPickUpLocation AtPickUpLocation
-0 null 0 0 null null AtPickUpLocation AtPickUpLocation
-0 null 0 0 null null AtPickUpLocation AtPickUpLocation
-0 null 25 0 toronto ottawa AtPickUpLocation AtPickUpLocation
+0 null 0 0 null null  AtPickUpLocation
+0 null 23 0 bim bop AtPickUpLocation AtPickUpLocation

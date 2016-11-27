@@ -22,14 +22,14 @@ public class CommandLineInterface {
     public CommandLineInterface() {
         /*yyyyyyyy*/
         currentUser = null;
-        tms = new TrainManagementSystem();
+        tms = TrainManagementSystem.getInstance();
     }
 
     public User getCurrentUser() {
         return currentUser;
     }
         
-    public void presentMenu(){
+    public  void presentMenu(){
         ArrayList<Train> trains = tms.getTrainsInSystem();
         if(trains == null) return;
         Scanner scanner = new Scanner(System.in);
@@ -57,7 +57,7 @@ public class CommandLineInterface {
         
     }
     
-    public static void main (String[] args){
+    public static void main (String args[]){
         CommandLineInterface cli = new CommandLineInterface();
         System.out.println();
         cli.presentMenu();
@@ -90,7 +90,11 @@ public class CommandLineInterface {
             }
                    
         }
-             else System.out.println("No user exists with those credentials.");
+             else {
+            System.out.println("No user exists with those credentials.");
+            this.presentMenu();
+            return;
+        }
         }catch(NullPointerException e) {
              System.out.println("No user exists with those credentials.");
         }

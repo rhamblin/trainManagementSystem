@@ -140,7 +140,7 @@ public class Train {
     }
     @Override
     public String toString() {
-        return id + " " + driver_name + " " + capacity + " " + currentPassengersAboard + " " + startLocation + " " + endLocation + " " + currentState.toString() ;
+        return id + " " + driver_name + " " + capacity + " " + currentPassengersAboard + " " + startLocation + " " + endLocation + " " +currentState.toString() ;
     }
 
     private void addSelfToFile() {

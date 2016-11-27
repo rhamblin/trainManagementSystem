@@ -21,12 +21,13 @@ import java.util.logging.Logger;
  * @author rhamblin
  */
 public class TrainManagementSystem {
+    private static TrainManagementSystem tms;
     private FileLogger fileLogger;
     private ArrayList<Train> trainsInSystem;
     private ArrayList<Train> trainsCurrentlyOnRoad;
     private ArrayList<TrainDriver> train_drivers ;
 
-    public TrainManagementSystem() {
+    private TrainManagementSystem() {
         this.trainsCurrentlyOnRoad = new ArrayList<>();
         this.train_drivers = new ArrayList<>();
         this.trainsInSystem = new ArrayList<>();
@@ -38,6 +39,12 @@ public class TrainManagementSystem {
 //        System.out.print(this.train_drivers.get(0).getName());
     }
     
+    public static TrainManagementSystem getInstance(){
+        if (tms== null)
+            return new TrainManagementSystem();
+        else 
+            return tms;
+    }
     public void addTrainToSystem( Train t ){
         if(t!=null)
         this.trainsInSystem.add(t);
@@ -125,10 +132,9 @@ public class TrainManagementSystem {
             BufferedReader br = new BufferedReader(fr);
             
             while( (line = br.readLine()) != null){
-                if(line.equals("d")) continue;
                 split = line.split(" ");
-                //fix how it makes a train -- add in all instance variables
-                //public Train( int id, int capacity, int currentPassengersAboard, String driver_name, String startLocation, String endLocation) {
+                
+//public Train( int id, int capacity, int currentPassengersAboard, String driver_name, String startLocation, String endLocation) {
                 this.trainsInSystem.add(new Train(Integer.parseInt(split[0]), Integer.parseInt(split[2]), Integer.parseInt(split[3]), split[1], split[4], split[5]));
            //    this.trainsInSystem.add(new Train(Integer.parseInt(split[2]), split[4], split[5] ));
                 if(!split[6].equals("AtPickUpLoctation") | !split[6].equals("AtDestination")); 

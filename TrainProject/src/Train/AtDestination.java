@@ -9,11 +9,7 @@ package Train;
  * @author rhamblin
  */
 public class AtDestination extends State{
-
-    public AtDestination() {
-        
-    }
-
+    
     @Override
     public String toString() {
         return "AtDestination";

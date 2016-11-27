@@ -4,16 +4,13 @@
  */
 package Train;
 
-import TrainManagementSystem.FileLogger;
-
 /**
  *
  * @author rhamblin
  */
 public class Enroute extends State{
 
-  
-
+    
     @Override
     public String toString() {
         return "Enroute";

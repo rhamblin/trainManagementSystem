@@ -9,6 +9,7 @@ package Users;
  * @author rhamblin
  */
 import Train.*;
+import TrainManagementSystem.CommandLineInterface;
 import TrainManagementSystem.FileLogger;
 import TrainManagementSystem.TrainManagementSystem;
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ public class Manager extends User{
         FileLogger fl = new FileLogger();
         int capacity;
         int choice, count = 0;
+        boolean wrongInfo;
         Scanner scanner = new Scanner (System.in);
         
          System.out.println("\t\tWelcome manager!\nSelect an option below:");
@@ -44,9 +46,9 @@ public class Manager extends User{
          
          do{
             System.out.print("\nEnter choice: ");
-            choice  = scanner.nextInt(); 
+            choice  = scanner.nextInt();
           } while(choice<1 | choice>6);
-         
+          
          switch(choice){
              case 1: 
                   do{
@@ -81,11 +83,16 @@ public class Manager extends User{
                   pass = scanner.next();
                   
                   System.out.println(); 
-                  
+                  wrongInfo = false;
                   if(name.equals(" ") || pass.equals(" ") ){
                       System.out.println("Incorrect information");
+                      wrongInfo = true;
                   }
-                  } while(name.equals(" ") || pass.equals(" ") );
+                  if(fl.isInFile(FileLogger.usersFileName, name + " " + pass)) {
+                        System.out.println("User already exist");
+                      wrongInfo = true;
+                  }
+                  } while(wrongInfo);
                   
                  //create driver
                  TrainDriver td = new TrainDriver(tms, name, pass);
@@ -100,7 +107,8 @@ public class Manager extends User{
                  System.out.print("\nSelect your train: \n");
 
                  for (Train t : tms.getTrainsInSystem()) {
-
+                    //   String[] split = t.simplifiedToString().split(" ");
+                       
                      System.out.println(t.simplifiedToString());
                      count++;
                  }
@@ -158,8 +166,20 @@ public class Manager extends User{
                  train.boardDriver(driver);
                  
                  break;
+             default: 
+                 System.out.println("Invalid Choice");
+                 this.CommandLineUserDisplay();
+                 break;
          }
          
+        
+           CommandLineInterface cli = new CommandLineInterface();
+        System.out.println();
+        cli.presentMenu();
+        cli.getCurrentUser().CommandLineUserDisplay();
+                
+    
+          
          
     }
     

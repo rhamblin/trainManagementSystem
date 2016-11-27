@@ -20,11 +20,14 @@ public abstract class State {
      *          of the state changes.
      */
     public State(){
-       
+
     }
+    
     public void logEventToFile(Train t){
         FileLogger fl = new FileLogger();
-       fl.writeToFile(FileLogger.trainEventsLogFileName, t.toString() + " " + this.toString());
+        String str = t.toString() + " " + this.toString();
+        if(!fl.isInFile(FileLogger.trainEventsLogFileName, str))
+       fl.writeToFile(FileLogger.trainEventsLogFileName, str);
     }
     
     public abstract String toString();
