@@ -4,7 +4,13 @@
  * and open the template in the editor.
  */
 
+import Train.Delayed;
+import Train.State;
+import Train.Train;
 import TrainManagementSystem.FileLogger;
+import TrainManagementSystem.TrainManagementSystem;
+import Users.Manager;
+import Users.TrainDriver;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -34,7 +40,7 @@ public class Test extends TestCase {
         super.tearDown();
     }
 
-    public void testIsInFile() {
+    public void test1() {
         FileReader fr = null;
          String filename = "src/test.txt", expected = null ;
          boolean result ;
@@ -63,7 +69,7 @@ public class Test extends TestCase {
     }
    
     
-  public void testEditingFile() {
+  public void test2() {
         FileReader fr = null;
         FileLogger fl = new FileLogger();
          String filename = "src/test.txt", expected = null , result = null;
@@ -110,8 +116,8 @@ public class Test extends TestCase {
     //    assertEquals(expected,result);
     }
   
-  public void testRemovingALine(){
-      boolean result;
+  public void test3(){
+      
       String filename = "src/test.txt";
       FileLogger fl = new FileLogger();
       BufferedReader br  = null;
@@ -133,6 +139,62 @@ public class Test extends TestCase {
         fl.removeEntireLineFromFile(filename, toBeRemoved);
         assertFalse( fl.isInFile(filename, toBeRemoved));
   }
-    // TODO add test methods here. The name must begin with 'test'. For example:
-    // public void testHello() {}
+   
+  public void test4(){
+      boolean expected = false;
+      try{
+      Manager m  = new Manager(null, "joe", "gg");
+      }catch(IllegalArgumentException e) {
+          expected = true;
+      }
+      
+   assertTrue(expected);    
+      
+  }
+  
+   public void test5(){
+      boolean expected = false;
+      String str = "f";
+      try{
+          
+      Manager m  = new Manager(
+              TrainManagementSystem.getInstance(), str,str);
+      }catch(IllegalArgumentException e) {
+          expected = true;
+      }
+      
+   assertFalse(expected);    
+      
+  }
+   
+   public void test6(){
+       Train t = new Train(1, "Toronto", "Ottawa");
+       
+       t.boardPassenger();
+       
+       assertFalse(t.boardPassenger());
+       
+   }
+   
+   public void test7(){
+      assertTrue(State.generateState("Delayed") instanceof Delayed);
+ }
+   
+   
+   public void test8(){
+       Train t = new Train(1, "Toronto", "Ottawa");
+       State s = t.getState();
+       try{
+       t.setState(new Delayed());}
+       catch(Exception e){}
+       assertEquals(s.toString(),t.getState().toString());
+   }
+   
+   public void test9( ){
+   Train t = new Train(1, "Toronto", "Ottawa");
+       assertEquals(t.getCapacity(),1);
+   }
+   public void test10(){
+   Train t = new Train(1, "Toronto", "Ottawa");
+       assertEquals(t.getCurrentPassengersAboard(),0);}
 }
